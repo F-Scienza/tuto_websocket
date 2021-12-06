@@ -20,10 +20,14 @@ httpServer.listen(3000, ()=> console.log('server ON'))
 // que se abre una nueva conexión
 
 io.on('connection', (socket)=>{
+    console.log('---------------------')
     console.log('usuario conectado')
     //  .emit recibe dos parametros
     //  nombre del evento y informacion a transmitir
-    socket.emit('mi mensaje', 'primer mensaje desde el servidor')
+    socket.emit('notificacion', 'primer mensaje desde el servidor')
+    socket.on("notificacion", data=>{
+        console.log(data)
+    })
 })
 
 
