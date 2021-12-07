@@ -14,7 +14,7 @@ app.get('/', (req, res)=>{
 })
 
 //  http server escuchando puerto 3000
-httpServer.listen(3000, ()=> console.log('server ON'))
+httpServer.listen(process.env.PORT || 3000, ()=> console.log('server ON'))
 
 // Esto se ejecuta solo la primera vez 
 // que se abre una nueva conexión
@@ -27,6 +27,7 @@ io.on('connection', (socket)=>{
     socket.emit('notificacion', 'primer mensaje desde el servidor')
     socket.on("notificacion", data=>{
         console.log(data)
+        io.sockets.emit("notificacion", data)
     })
 })
 
